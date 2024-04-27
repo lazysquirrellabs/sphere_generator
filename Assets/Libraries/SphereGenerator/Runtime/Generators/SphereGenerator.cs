@@ -8,6 +8,12 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 	/// </summary>
 	internal abstract class SphereGenerator
 	{
+		#region Fields
+
+		protected const int MaxVertexCountUInt16 = 65_535;
+
+		#endregion
+		
 		#region Internal
 
 		/// <summary>

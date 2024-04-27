@@ -1,13 +1,14 @@
 using LazySquirrelLabs.SphereGenerator.Data;
 using Unity.Collections;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace LazySquirrelLabs.SphereGenerator.Generators
 {
 	/// <summary>
 	/// Generates spherical meshes, using a regular icosahedron as base.
 	/// </summary>
-	internal sealed class IcosphereGenerator : Generators.SphereGenerator
+	internal sealed class IcosphereGenerator : SphereGenerator
 	{
 		#region Fields
 
@@ -98,6 +99,8 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			using var newMeshData = MeshFragmenter.Fragment(mashData, _fragmentationDepth, Allocator.Temp);
 			newMeshData.SetRadius(_radius);
 			var mesh = new Mesh();
+			if (newMeshData.Vertices.Length > MaxVertexCountUInt16)
+				mesh.indexFormat = IndexFormat.UInt32;
 			mesh.SetVertices(newMeshData.Vertices);
 			mesh.SetIndices(newMeshData.Indices, MeshTopology.Triangles, 0);
 			mesh.RecalculateBounds();
