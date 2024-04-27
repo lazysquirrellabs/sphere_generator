@@ -16,7 +16,7 @@ namespace LazySquirrelLabs.SphereGenerator
 		{
 			if (fragmentationDepth == 0)
 			{
-				throw new ArgumentOutOfRangeException(nameof(fragmentationDepth));
+				return meshData;
 			}
 
 			// Each triangle has 3 indices, so divide the number of indices by 3 to find the number of triangles
