@@ -21,6 +21,8 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		private readonly ushort _fragmentationDepth;
 
+		private readonly bool _fragment;
+
 		#endregion
 
 		#region Properties
@@ -36,7 +38,14 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		private protected SphereGenerator(float radius, ushort fragmentationDepth)
 		{
 			_radius = radius;
+			_fragment = true;
 			_fragmentationDepth = fragmentationDepth;
+		}
+
+		private protected SphereGenerator(float radius)
+		{
+			_radius = radius;
+			_fragment = false;
 		}
 
 		#endregion
@@ -59,14 +68,25 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				indices.Add(t);
 			}
 
-			using var mashData = new MeshData(vertices, indices);
-			using var newMeshData = MeshFragmenter.Fragment(mashData, _fragmentationDepth, Allocator.Temp);
-			newMeshData.SetRadius(_radius);
+			using var basicMeshData = new MeshData(vertices, indices);
+			MeshData finalMeshData;
+
+			if (_fragment)
+			{
+				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _fragmentationDepth, Allocator.Temp);
+				finalMeshData = newMeshData;
+			}
+			else
+			{
+				finalMeshData = basicMeshData;
+			}
+
+			finalMeshData.SetRadius(_radius);
 			var mesh = new Mesh();
-			if (newMeshData.Vertices.Length > MaxVertexCountUInt16)
+			if (finalMeshData.Vertices.Length > MaxVertexCountUInt16)
 				mesh.indexFormat = IndexFormat.UInt32;
-			mesh.SetVertices(newMeshData.Vertices);
-			mesh.SetIndices(newMeshData.Indices, MeshTopology.Triangles, 0);
+			mesh.SetVertices(finalMeshData.Vertices);
+			mesh.SetIndices(finalMeshData.Indices, MeshTopology.Triangles, 0);
 			mesh.RecalculateBounds();
 			mesh.RecalculateNormals();
 			mesh.RecalculateTangents();
