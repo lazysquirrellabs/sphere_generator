@@ -1,6 +1,6 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Vector3 = UnityEngine.Vector3;
 
 namespace LazySquirrelLabs.SphereGenerator.Generators
 {
@@ -14,19 +14,24 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal UVSphereGenerator(float radius, ushort fragmentationDepth) : base(radius)
+		internal UVSphereGenerator(float radius, ushort depth) : base(radius)
 		{
-			var polarDelta = Mathf.PI / fragmentationDepth;
+			if (depth <= 3)
+			{
+				throw new ArgumentOutOfRangeException(nameof(depth), "Depth must be greater than 3.");
+			}
+			
+			var polarDelta = Mathf.PI / depth;
 			var azimuthalDelta = 2 * polarDelta;
-			var vertices = GetVertexBuffer(fragmentationDepth);
-			var indices = GetIndicesBuffer(fragmentationDepth);
+			var vertices = GetVertexBuffer(depth);
+			var indices = GetIndicesBuffer(depth);
 			vertices[0] = Vector3.up;
 			var vertexIx = 1;
 			var indicesIx = 0;
 
-			for (var polarStep = 1; polarStep < fragmentationDepth; polarStep++)
+			for (var polarStep = 1; polarStep < depth; polarStep++)
 			{
-				for (var azimuthalStep = 0; azimuthalStep < fragmentationDepth; azimuthalStep++)
+				for (var azimuthalStep = 0; azimuthalStep < depth; azimuthalStep++)
 				{
 					var addSecondTriangle = polarStep != 1;
 					AddVertex(polarStep, azimuthalStep, addSecondTriangle);
@@ -34,12 +39,12 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			}
 			
 			vertices[vertexIx] = Vector3.down;
-			var indexOfFirstVertexFromLastSlice = vertexIx - fragmentationDepth;
+			var indexOfFirstVertexFromLastSlice = vertexIx - depth;
 
-			for (var azimuthalStep = 0; azimuthalStep < fragmentationDepth; azimuthalStep++)
+			for (var azimuthalStep = 0; azimuthalStep < depth; azimuthalStep++)
 			{
 				var secondIx = indexOfFirstVertexFromLastSlice + azimuthalStep;
-				var thirdIx = azimuthalStep == fragmentationDepth - 1 ? indexOfFirstVertexFromLastSlice : secondIx + 1;
+				var thirdIx = azimuthalStep == depth - 1 ? indexOfFirstVertexFromLastSlice : secondIx + 1;
 				AddTriangle(vertexIx, secondIx, thirdIx, indices, ref indicesIx);
 			}
 			
@@ -79,9 +84,9 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				vertices[vertexIx] = PolarToCartesian(polar, azimuth);
 				// Debug.Log(vertices[vertexIx]);
 
-				var secondVertexIx = GetVertexAboveIndex(polarStep, vertexIx, fragmentationDepth);
-				var thirdVertexIx = GetVertexAboveNextIndex(polarStep, azimuthalStep, vertexIx, fragmentationDepth);
-				var fourthVertexIx = GetNextVertexInPolarSliceIndex(azimuthalStep, vertexIx, fragmentationDepth);
+				var secondVertexIx = GetVertexAboveIndex(polarStep, vertexIx, depth);
+				var thirdVertexIx = GetVertexAboveNextIndex(polarStep, azimuthalStep, vertexIx, depth);
+				var fourthVertexIx = GetNextVertexInPolarSliceIndex(azimuthalStep, vertexIx, depth);
 
 				AddTriangle(vertexIx, secondVertexIx, fourthVertexIx, indices, ref indicesIx);
 				if (addSecondTriangle)

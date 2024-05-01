@@ -41,18 +41,18 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// </summary>
 		private static readonly Vector3[] IcosphereVertices =
 		{
-			new(0.8506508f,           0.5257311f,         0f),
-			new(0.000000101405476f,   0.8506507f,        -0.525731f),
-			new(0.000000101405476f,   0.8506506f,         0.525731f),
-			new(0.5257309f,          -0.00000006267203f, -0.85065067f),
-			new(0.52573115f,         -0.00000006267203f,  0.85065067f),
-			new(0.8506508f,          -0.5257311f,         0f),
-			new(-0.52573115f,         0.00000006267203f, -0.85065067f),
-			new(-0.8506508f,          0.5257311f,         0f),
-			new(-0.5257309f,          0.00000006267203f,  0.85065067f),
-			new(-0.000000101405476f, -0.8506506f,        -0.525731f),
-			new(-0.000000101405476f, -0.8506507f,         0.525731f),
-			new(-0.8506508f,         -0.5257311f,         0f)
+			new(0.8506508f,           0.5257311f,         0f),            // 0
+			new(0.000000101405476f,   0.8506507f,        -0.525731f),     // 1
+			new(0.000000101405476f,   0.8506506f,         0.525731f),     // 2
+			new(0.5257309f,          -0.00000006267203f, -0.85065067f),   // 3
+			new(0.52573115f,         -0.00000006267203f,  0.85065067f),   // 4
+			new(0.8506508f,          -0.5257311f,         0f),            // 5
+			new(-0.52573115f,         0.00000006267203f, -0.85065067f),   // 6
+			new(-0.8506508f,          0.5257311f,         0f),            // 7
+			new(-0.5257309f,          0.00000006267203f,  0.85065067f),   // 8
+			new(-0.000000101405476f, -0.8506506f,        -0.525731f),     // 9
+			new(-0.000000101405476f, -0.8506507f,         0.525731f),     // 10
+			new(-0.8506508f,         -0.5257311f,         0f)             // 1
 		};
 
 		#endregion
@@ -66,7 +66,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal IcosphereGenerator(float radius, ushort fragmentationDepth) : base(radius, fragmentationDepth) { }
+		internal IcosphereGenerator(float radius, ushort depth) : base(radius, depth) { }
 
 		#endregion
 	}

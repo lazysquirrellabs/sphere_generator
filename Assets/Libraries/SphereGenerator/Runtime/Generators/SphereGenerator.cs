@@ -13,13 +13,13 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		#region Fields
 
 		private const int MaxVertexCountUInt16 = 65_535;
-		
+
 		/// <summary>
 		/// The radius of the generated sphere (i.e. the distance between each vertex and the sphere's center).
 		/// </summary>
 		private readonly float _radius;
 
-		private readonly ushort _fragmentationDepth;
+		private readonly ushort _depth;
 
 		private readonly bool _fragment;
 
@@ -28,18 +28,18 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		#region Properties
 
 		private protected abstract int[] Indices { get; }
-		
+
 		private protected abstract Vector3[] Vertices { get; }
 
 		#endregion
-		
+
 		#region Setup
 
-		private protected SphereGenerator(float radius, ushort fragmentationDepth)
+		private protected SphereGenerator(float radius, ushort depth)
 		{
 			_radius = radius;
 			_fragment = true;
-			_fragmentationDepth = fragmentationDepth;
+			_depth = depth;
 		}
 
 		private protected SphereGenerator(float radius)
@@ -73,7 +73,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 			if (_fragment)
 			{
-				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _fragmentationDepth, Allocator.Temp);
+				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _depth, Allocator.Temp);
 				finalMeshData = newMeshData;
 			}
 			else

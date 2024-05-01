@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using Unity.Collections;
 using UnityEngine;
 
@@ -24,12 +23,6 @@ namespace LazySquirrelLabs.SphereGenerator.Data
 		#endregion
 
 		#region Setup
-
-		internal MeshData(Vector3[] vertices, int[] indices)
-		{
-			_vertices = new NativeArray<Vector3>(vertices, Allocator.Temp);
-			_indices = new NativeArray<int>(indices, Allocator.Temp);
-		}
 
 		internal MeshData(NativeArray<Vector3> vertices, NativeArray<int> indices)
 		{

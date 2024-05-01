@@ -46,7 +46,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		
 		#region Setup
 
-		internal CubeSphereGenerator(float radius, ushort fragmentationDepth) : base(radius, fragmentationDepth) { }
+		internal CubeSphereGenerator(float radius, ushort depth) : base(radius, depth) { }
 
 		#endregion
 	}
