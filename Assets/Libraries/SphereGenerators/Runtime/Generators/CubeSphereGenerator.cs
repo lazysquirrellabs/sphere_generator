@@ -1,9 +1,9 @@
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator.Generators
+namespace LazySquirrelLabs.SphereGenerators.Generators
 {
-	internal class CubeSphereGenerator : SphereGenerator
+	public class CubeSphereGenerator : SphereGenerator
 	{
 		#region Fields
 
@@ -46,10 +46,10 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal CubeSphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, depth, allocator)
+		internal CubeSphereGenerator(float radius, ushort depth) : base(radius, depth)
 		{
-			Indices = new NativeArray<int>(CubeSphereIndices, Allocator);
-			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator);
+			Indices = new NativeArray<int>(CubeSphereIndices, Allocator.Temp);
+			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator.Temp);
 		}
 
 		#endregion

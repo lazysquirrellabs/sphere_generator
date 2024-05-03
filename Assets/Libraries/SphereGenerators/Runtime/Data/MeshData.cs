@@ -2,7 +2,7 @@ using System;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator.Data
+namespace LazySquirrelLabs.SphereGenerators.Data
 {
 	internal struct MeshData : IDisposable
 	{

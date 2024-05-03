@@ -2,9 +2,9 @@ using System;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator.Generators
+namespace LazySquirrelLabs.SphereGenerators.Generators
 {
-	internal class UVSphereGenerator : SphereGenerator
+	public class UVSphereGenerator : SphereGenerator
 	{
 		#region
 
@@ -14,7 +14,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal UVSphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, allocator)
+		internal UVSphereGenerator(float radius, ushort depth) : base(radius)
 		{
 			if (depth <= 3)
 			{
@@ -23,8 +23,8 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 			var polarDelta = Mathf.PI / depth;
 			var azimuthalDelta = 2 * polarDelta;
-			var vertices = GetVertexBuffer(depth, Allocator);
-			var indices = GetIndicesBuffer(depth, Allocator);
+			var vertices = GetVertexBuffer(depth, Allocator.Temp);
+			var indices = GetIndicesBuffer(depth, Allocator.Temp);
 			vertices[0] = Vector3.up;
 			var vertexIx = 1;
 			var indicesIx = 0;

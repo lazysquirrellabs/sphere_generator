@@ -1,15 +1,15 @@
-using LazySquirrelLabs.SphereGenerator.Data;
-using LazySquirrelLabs.SphereGenerator.Fragmentation;
+using LazySquirrelLabs.SphereGenerators.Data;
+using LazySquirrelLabs.SphereGenerators.Fragmentation;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace LazySquirrelLabs.SphereGenerator.Generators
+namespace LazySquirrelLabs.SphereGenerators.Generators
 {
 	/// <summary>
 	/// Base class for all shape generators.
 	/// </summary>
-	internal abstract class SphereGenerator
+	public abstract class SphereGenerator
 	{
 		#region Fields
 
@@ -32,25 +32,21 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		private protected abstract NativeArray<Vector3> Vertices { get; }
 
-		private protected Allocator Allocator { get; }
-
 		#endregion
 
 		#region Setup
 
-		private protected SphereGenerator(float radius, ushort depth, Allocator allocator)
+		private protected SphereGenerator(float radius, ushort depth)
 		{
 			_radius = radius;
 			_fragment = true;
 			_depth = depth;
-			Allocator = allocator;
 		}
 
-		private protected SphereGenerator(float radius, Allocator allocator)
+		private protected SphereGenerator(float radius)
 		{
 			_radius = radius;
 			_fragment = false;
-			Allocator = allocator;
 		}
 
 		#endregion
@@ -64,7 +60,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 			if (_fragment)
 			{
-				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _depth, Allocator);
+				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _depth, Allocator.Temp);
 				finalMeshData = newMeshData;
 			}
 			else

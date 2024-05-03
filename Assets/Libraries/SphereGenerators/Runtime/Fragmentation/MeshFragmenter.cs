@@ -1,9 +1,9 @@
 using System;
-using LazySquirrelLabs.SphereGenerator.Data;
+using LazySquirrelLabs.SphereGenerators.Data;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator.Fragmentation
+namespace LazySquirrelLabs.SphereGenerators.Fragmentation
 {
 	/// <summary>
 	/// Fragments a mesh into sub-triangles given an arbitrary depth. The original mesh is modified.

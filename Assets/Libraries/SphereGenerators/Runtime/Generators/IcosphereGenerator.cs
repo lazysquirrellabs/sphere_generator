@@ -1,12 +1,12 @@
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator.Generators
+namespace LazySquirrelLabs.SphereGenerators.Generators
 {
 	/// <summary>
 	/// Generates spherical meshes, using a regular icosahedron as base.
 	/// </summary>
-	internal sealed class IcosphereGenerator : SphereGenerator
+	public sealed class IcosphereGenerator : SphereGenerator
 	{
 		#region Fields
 
@@ -53,7 +53,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			new(-0.5257309f,          0.00000006267203f,  0.85065067f),   // 8
 			new(-0.000000101405476f, -0.8506506f,        -0.525731f),     // 9
 			new(-0.000000101405476f, -0.8506507f,         0.525731f),     // 10
-			new(-0.8506508f,         -0.5257311f,         0f)             // 1
+			new(-0.8506508f,         -0.5257311f,         0f)             // 11
 		};
 
 		#endregion
@@ -68,10 +68,10 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal IcosphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, depth, allocator)
+		internal IcosphereGenerator(float radius, ushort depth) : base(radius, depth)
 		{
-			Indices = new NativeArray<int>(IcosphereIndices, Allocator);
-			Vertices = new NativeArray<Vector3>(IcosphereVertices, Allocator);
+			Indices = new NativeArray<int>(IcosphereIndices, Allocator.Temp);
+			Vertices = new NativeArray<Vector3>(IcosphereVertices, Allocator.Temp);
 		}
 
 		#endregion
