@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerator.Generators
@@ -22,7 +23,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			7, 6, 3
 		};
 
-		private static readonly Vector3[] CubeSphereVertices=
+		private static readonly Vector3[] CubeSphereVertices =
 		{
 			new(-0.5f,  0.5f, -0.5f), // 0
 			new( 0.5f,  0.5f, -0.5f), // 1
@@ -33,20 +34,23 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			new(-0.5f, -0.5f,  0.5f), // 6
 			new( 0.5f, -0.5f,  0.5f)  // 7
 		};
-		
+
 		#endregion
-		
+
 		#region Properties
 
-
-		private protected override int[] Indices => CubeSphereIndices;
-		private protected override Vector3[] Vertices => CubeSphereVertices;
+		private protected override NativeArray<int> Indices { get; }
+		private protected override NativeArray<Vector3> Vertices { get; }
 
 		#endregion
-		
+
 		#region Setup
 
-		internal CubeSphereGenerator(float radius, ushort depth) : base(radius, depth) { }
+		internal CubeSphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, depth, allocator)
+		{
+			Indices = new NativeArray<int>(CubeSphereIndices, Allocator);
+			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator);
+		}
 
 		#endregion
 	}

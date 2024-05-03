@@ -1,3 +1,4 @@
+using Unity.Collections;
 using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerator.Generators
@@ -59,14 +60,19 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Properties
 
-		private protected override int[] Indices => IcosphereIndices;
-		private protected override Vector3[] Vertices => IcosphereVertices;
+		private protected override NativeArray<int> Indices { get; }
+
+		private protected override NativeArray<Vector3> Vertices { get; }
 
 		#endregion
 
 		#region Setup
 
-		internal IcosphereGenerator(float radius, ushort depth) : base(radius, depth) { }
+		internal IcosphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, depth, allocator)
+		{
+			Indices = new NativeArray<int>(IcosphereIndices, Allocator);
+			Vertices = new NativeArray<Vector3>(IcosphereVertices, Allocator);
+		}
 
 		#endregion
 	}

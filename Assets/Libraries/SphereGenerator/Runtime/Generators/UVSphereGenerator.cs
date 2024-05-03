@@ -1,5 +1,5 @@
 using System;
-using System.Collections.Generic;
+using Unity.Collections;
 using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerator.Generators
@@ -14,17 +14,17 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Setup
 
-		internal UVSphereGenerator(float radius, ushort depth) : base(radius)
+		internal UVSphereGenerator(float radius, ushort depth, Allocator allocator) : base(radius, allocator)
 		{
 			if (depth <= 3)
 			{
 				throw new ArgumentOutOfRangeException(nameof(depth), "Depth must be greater than 3.");
 			}
-			
+
 			var polarDelta = Mathf.PI / depth;
 			var azimuthalDelta = 2 * polarDelta;
-			var vertices = GetVertexBuffer(depth);
-			var indices = GetIndicesBuffer(depth);
+			var vertices = GetVertexBuffer(depth, Allocator);
+			var indices = GetIndicesBuffer(depth, Allocator);
 			vertices[0] = Vector3.up;
 			var vertexIx = 1;
 			var indicesIx = 0;
@@ -37,7 +37,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 					AddVertex(polarStep, azimuthalStep, addSecondTriangle);
 				}
 			}
-			
+
 			vertices[vertexIx] = Vector3.down;
 			var indexOfFirstVertexFromLastSlice = vertexIx - depth;
 
@@ -47,27 +47,28 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				var thirdIx = azimuthalStep == depth - 1 ? indexOfFirstVertexFromLastSlice : secondIx + 1;
 				AddTriangle(vertexIx, secondIx, thirdIx, indices, ref indicesIx);
 			}
-			
+
 			Vertices = vertices;
 			Indices = indices;
 			return;
 
-			static Vector3[] GetVertexBuffer(ushort fragmentationDepth)
+			static NativeArray<Vector3> GetVertexBuffer(ushort fragmentationDepth, Allocator allocator)
 			{
 				var sliceVertexCount = (fragmentationDepth - 1) * fragmentationDepth; // Polar slices * azimuthal slices
-				return new Vector3[sliceVertexCount + 2]; // Polar and azimuthal slices + poles.
+				var totalVertexCount = sliceVertexCount + 2; // Polar and azimuthal slices + poles.
+				return new NativeArray<Vector3>(totalVertexCount, allocator, NativeArrayOptions.UninitializedMemory);
 			}
 
-			static int[] GetIndicesBuffer(ushort fragmentationDepth)
+			static NativeArray<int> GetIndicesBuffer(ushort fragmentationDepth, Allocator allocator)
 			{
 				var quadCount = (fragmentationDepth - 2) * fragmentationDepth;
 				var polarTriangleCount = 2 * fragmentationDepth;
 				var triangleCount = 2 * quadCount + polarTriangleCount;
 				var indicesCount = triangleCount * 3;
-				return new int[indicesCount];
+				return new NativeArray<int>(indicesCount, allocator, NativeArrayOptions.UninitializedMemory);
 			}
-			
-			static void AddTriangle(int ix1, int ix2, int ix3, IList<int> indices, ref int indicesIx)
+
+			static void AddTriangle(int ix1, int ix2, int ix3, NativeArray<int> indices, ref int indicesIx)
 			{
 				indices[indicesIx] = ix1;
 				indicesIx++;
@@ -76,7 +77,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				indices[indicesIx] = ix3;
 				indicesIx++;
 			}
-			
+
 			void AddVertex(int polarStep, int azimuthalStep, bool addSecondTriangle)
 			{
 				var polar = polarDelta * polarStep;
@@ -89,11 +90,15 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				var fourthVertexIx = GetNextVertexInPolarSliceIndex(azimuthalStep, vertexIx, depth);
 
 				AddTriangle(vertexIx, secondVertexIx, fourthVertexIx, indices, ref indicesIx);
+
 				if (addSecondTriangle)
+				{
 					AddTriangle(secondVertexIx, thirdVertexIx, fourthVertexIx, indices, ref indicesIx);
+				}
+
 				vertexIx++;
 				return;
-				
+
 				static Vector3 PolarToCartesian(float polar, float azimuth)
 				{
 					var polarSin = Mathf.Sin(polar);
@@ -135,9 +140,9 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Properties
 
-		private protected override int[] Indices { get; }
+		private protected override NativeArray<int> Indices { get; }
 
-		private protected override Vector3[] Vertices { get; }
+		private protected override NativeArray<Vector3> Vertices { get; }
 
 		#endregion
 	}

@@ -13,13 +13,13 @@ namespace LazySquirrelLabs.SphereGenerator.Data
 		private NativeArray<Vector3> _vertices;
 
 		#endregion
-		
+
 		#region Properties
 
 		internal NativeArray<Vector3> Vertices => _vertices;
 
 		internal NativeArray<int> Indices => _indices;
-		
+
 		#endregion
 
 		#region Setup
@@ -41,7 +41,7 @@ namespace LazySquirrelLabs.SphereGenerator.Data
 		}
 
 		#endregion
-		
+
 		#region Internal
 
 		internal void SetRadius(float radius)
@@ -53,7 +53,5 @@ namespace LazySquirrelLabs.SphereGenerator.Data
 		}
 
 		#endregion
-
-
 	}
 }

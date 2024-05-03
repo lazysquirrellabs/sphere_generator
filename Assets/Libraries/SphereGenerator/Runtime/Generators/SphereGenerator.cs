@@ -1,4 +1,5 @@
 using LazySquirrelLabs.SphereGenerator.Data;
+using LazySquirrelLabs.SphereGenerator.Fragmentation;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -27,53 +28,43 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 		#region Properties
 
-		private protected abstract int[] Indices { get; }
+		private protected abstract NativeArray<int> Indices { get; }
 
-		private protected abstract Vector3[] Vertices { get; }
+		private protected abstract NativeArray<Vector3> Vertices { get; }
+
+		private protected Allocator Allocator { get; }
 
 		#endregion
 
 		#region Setup
 
-		private protected SphereGenerator(float radius, ushort depth)
+		private protected SphereGenerator(float radius, ushort depth, Allocator allocator)
 		{
 			_radius = radius;
 			_fragment = true;
 			_depth = depth;
+			Allocator = allocator;
 		}
 
-		private protected SphereGenerator(float radius)
+		private protected SphereGenerator(float radius, Allocator allocator)
 		{
 			_radius = radius;
 			_fragment = false;
+			Allocator = allocator;
 		}
 
 		#endregion
 
 		#region Internal
 
-		internal Mesh Generate(Allocator allocator)
+		internal Mesh Generate()
 		{
-			var vertices = new NativeArray<Vector3>(Vertices, allocator);
-
-			for (var i = 0; i < Vertices.Length; i++)
-			{
-				vertices[i] = Vertices[i] * _radius;
-			}
-
-			var indices = new NativeList<int>(Indices.Length, allocator);
-
-			foreach (var t in Indices)
-			{
-				indices.Add(t);
-			}
-
-			using var basicMeshData = new MeshData(vertices, indices);
+			using var basicMeshData = new MeshData(Vertices, Indices);
 			MeshData finalMeshData;
 
 			if (_fragment)
 			{
-				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _depth, Allocator.Temp);
+				using var newMeshData = MeshFragmenter.Fragment(basicMeshData, _depth, Allocator);
 				finalMeshData = newMeshData;
 			}
 			else
@@ -83,8 +74,12 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 
 			finalMeshData.SetRadius(_radius);
 			var mesh = new Mesh();
+
 			if (finalMeshData.Vertices.Length > MaxVertexCountUInt16)
+			{
 				mesh.indexFormat = IndexFormat.UInt32;
+			}
+
 			mesh.SetVertices(finalMeshData.Vertices);
 			mesh.SetIndices(finalMeshData.Indices, MeshTopology.Triangles, 0);
 			mesh.RecalculateBounds();

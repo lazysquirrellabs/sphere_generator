@@ -3,7 +3,7 @@ using LazySquirrelLabs.SphereGenerator.Data;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerator
+namespace LazySquirrelLabs.SphereGenerator.Fragmentation
 {
 	/// <summary>
 	/// Fragments a mesh into sub-triangles given an arbitrary depth. The original mesh is modified.
@@ -77,8 +77,9 @@ namespace LazySquirrelLabs.SphereGenerator
 				return new NativeArray<T>(length, allocator, NativeArrayOptions.UninitializedMemory);
 			}
 
-			static void FragmentTriangle(int triangleIx, NativeArray<int> readTriangles, NativeArray<int> writeTriangles,
-			                             NativeArray<Vector3> readVertices, NativeArray<Vector3> writeVertices)
+			static void FragmentTriangle(int triangleIx, NativeArray<int> readTriangles,
+			                             NativeArray<int> writeTriangles, NativeArray<Vector3> readVertices, 
+			                             NativeArray<Vector3> writeVertices)
 			{
 				// Each original triangle has 3 vertices, so we need to offset that from reading
 				var readTriangleIx = triangleIx * 3;
