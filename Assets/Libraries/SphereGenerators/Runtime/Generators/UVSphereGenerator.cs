@@ -14,7 +14,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
-		internal UVSphereGenerator(float radius, ushort depth) : base(radius)
+		internal UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
 		{
 			if (depth <= 3)
 			{
@@ -83,7 +83,6 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 				var polar = polarDelta * polarStep;
 				var azimuth = azimuthalDelta * azimuthalStep;
 				vertices[vertexIx] = PolarToCartesian(polar, azimuth);
-				// Debug.Log(vertices[vertexIx]);
 
 				var secondVertexIx = GetVertexAboveIndex(polarStep, vertexIx, depth);
 				var thirdVertexIx = GetVertexAboveNextIndex(polarStep, azimuthalStep, vertexIx, depth);

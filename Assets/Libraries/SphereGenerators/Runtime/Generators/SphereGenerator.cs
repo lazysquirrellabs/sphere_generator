@@ -24,6 +24,8 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		private readonly bool _fragment;
 
+		private readonly string _meshName;
+
 		#endregion
 
 		#region Properties
@@ -36,17 +38,19 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
-		private protected SphereGenerator(float radius, ushort depth)
+		private protected SphereGenerator(float radius, ushort depth, string meshName)
 		{
 			_radius = radius;
 			_fragment = true;
 			_depth = depth;
+			_meshName = meshName;
 		}
 
-		private protected SphereGenerator(float radius)
+		private protected SphereGenerator(float radius, string meshName)
 		{
 			_radius = radius;
 			_fragment = false;
+			_meshName = meshName;
 		}
 
 		#endregion
@@ -70,6 +74,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 			finalMeshData.SetRadius(_radius);
 			var mesh = new Mesh();
+			mesh.name = _meshName;
 
 			if (finalMeshData.Vertices.Length > MaxVertexCountUInt16)
 			{

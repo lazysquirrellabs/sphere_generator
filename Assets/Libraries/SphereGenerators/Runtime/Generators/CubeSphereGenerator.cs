@@ -46,7 +46,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
-		internal CubeSphereGenerator(float radius, ushort depth) : base(radius, depth)
+		internal CubeSphereGenerator(float radius, ushort depth) : base(radius, depth, "Cube Sphere")
 		{
 			Indices = new NativeArray<int>(CubeSphereIndices, Allocator.Temp);
 			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator.Temp);

@@ -68,7 +68,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
-		internal IcosphereGenerator(float radius, ushort depth) : base(radius, depth)
+		internal IcosphereGenerator(float radius, ushort depth) : base(radius, depth, "Icosphere")
 		{
 			Indices = new NativeArray<int>(IcosphereIndices, Allocator.Temp);
 			Vertices = new NativeArray<Vector3>(IcosphereVertices, Allocator.Temp);
