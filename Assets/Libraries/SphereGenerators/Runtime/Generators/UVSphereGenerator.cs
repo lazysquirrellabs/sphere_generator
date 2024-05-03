@@ -16,7 +16,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		internal UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
 		{
-			if (depth <= 3)
+			if (depth < 3)
 			{
 				throw new ArgumentOutOfRangeException(nameof(depth), "Depth must be greater than 3.");
 			}
