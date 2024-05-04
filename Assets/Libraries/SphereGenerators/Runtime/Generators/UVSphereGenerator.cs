@@ -14,7 +14,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
-		internal UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
+		public UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
 		{
 			if (depth < 3)
 			{

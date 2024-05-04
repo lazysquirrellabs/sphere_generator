@@ -55,9 +55,9 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#endregion
 
-		#region Internal
+		#region Public
 
-		internal Mesh Generate()
+		public Mesh Generate()
 		{
 			using var basicMeshData = new MeshData(Vertices, Indices);
 			MeshData finalMeshData;
