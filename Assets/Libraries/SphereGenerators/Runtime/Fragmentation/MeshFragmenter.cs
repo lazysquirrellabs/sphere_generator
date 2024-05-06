@@ -16,7 +16,7 @@ namespace LazySquirrelLabs.SphereGenerators.Fragmentation
 		{
 			if (fragmentationDepth == 0)
 			{
-				return meshData;
+				return new MeshData(meshData.Vertices, meshData.Indices);
 			}
 
 			// Each triangle has 3 indices, so divide the number of indices by 3 to find the number of triangles
