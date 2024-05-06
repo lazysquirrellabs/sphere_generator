@@ -7,6 +7,21 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 	{
 		#region Fields
 
+		private static readonly Vector3[] CubeSphereVertices =
+		{
+			new(-0.5f,  0.5f, -0.5f), // 0
+			new( 0.5f,  0.5f, -0.5f), // 1
+			new( 0.5f, -0.5f, -0.5f), // 2
+			new(-0.5f, -0.5f, -0.5f), // 3
+			new(-0.5f,  0.5f,  0.5f), // 4
+			new( 0.5f,  0.5f,  0.5f), // 5
+			new(-0.5f, -0.5f,  0.5f), // 6
+			new( 0.5f, -0.5f,  0.5f)  // 7
+		};
+		
+		/// <summary>
+		/// 
+		/// </summary>
 		private static readonly int[] CubeSphereIndices =
 		{
 			0, 1, 2,
@@ -23,24 +38,13 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 			7, 6, 3
 		};
 
-		private static readonly Vector3[] CubeSphereVertices =
-		{
-			new(-0.5f,  0.5f, -0.5f), // 0
-			new( 0.5f,  0.5f, -0.5f), // 1
-			new( 0.5f, -0.5f, -0.5f), // 2
-			new(-0.5f, -0.5f, -0.5f), // 3
-			new(-0.5f,  0.5f,  0.5f), // 4
-			new( 0.5f,  0.5f,  0.5f), // 5
-			new(-0.5f, -0.5f,  0.5f), // 6
-			new( 0.5f, -0.5f,  0.5f)  // 7
-		};
-
 		#endregion
 
 		#region Properties
 
-		private protected override NativeArray<int> Indices { get; }
 		private protected override NativeArray<Vector3> Vertices { get; }
+		
+		private protected override NativeArray<int> Indices { get; }
 
 		#endregion
 
@@ -48,8 +52,8 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		public CubeSphereGenerator(float radius, ushort depth) : base(radius, depth, "Cube Sphere")
 		{
-			Indices = new NativeArray<int>(CubeSphereIndices, Allocator.Temp);
 			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator.Temp);
+			Indices = new NativeArray<int>(CubeSphereIndices, Allocator.Temp);
 		}
 
 		#endregion

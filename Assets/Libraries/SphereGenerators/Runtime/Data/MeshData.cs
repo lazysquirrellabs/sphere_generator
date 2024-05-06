@@ -8,9 +8,9 @@ namespace LazySquirrelLabs.SphereGenerators.Data
 	{
 		#region Fields
 
-		private NativeArray<int> _indices;
-
 		private NativeArray<Vector3> _vertices;
+		
+		private NativeArray<int> _indices;
 
 		#endregion
 

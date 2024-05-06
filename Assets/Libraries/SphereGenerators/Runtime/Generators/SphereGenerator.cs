@@ -30,9 +30,9 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Properties
 
-		private protected abstract NativeArray<int> Indices { get; }
-
 		private protected abstract NativeArray<Vector3> Vertices { get; }
+		
+		private protected abstract NativeArray<int> Indices { get; }
 
 		#endregion
 
