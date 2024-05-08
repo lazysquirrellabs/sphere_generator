@@ -4,40 +4,50 @@ using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerators.Generators
 {
+	/// A sphere generator that uses a UV sphere as basic shape.
 	public class UVSphereGenerator : SphereGenerator
 	{
-		#region
-
-		private readonly ushort _slices;
-
-		#endregion
-
 		#region Setup
 
+		/// <summary>
+		/// <see cref="UVSphereGenerator"/>'s constructor.
+		/// </summary>
+		/// <param name="radius">The radius of the generated UV spheres.</param>
+		/// <param name="depth">The fragmentation depth of the generated spheres. In order words, how many times the
+		/// basic shape will be fragmented to form the sphere mesh. The larger the value, the greater the level of
+		/// detail will be (more triangles and vertices) and the longer the generation process takes.
+		/// It must be equal or greater than 3.</param>
+		/// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="depth"/> is
+		/// lower than 3.</exception>
 		public UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
 		{
 			if (depth < 3)
 			{
-				throw new ArgumentOutOfRangeException(nameof(depth), "Depth must be greater than 3.");
+				throw new ArgumentOutOfRangeException(nameof(depth), "UV sphere depth must be greater than 3.");
 			}
 
-			var polarDelta = Mathf.PI / depth;
-			var azimuthalDelta = 2 * polarDelta;
+			// The depth represents both the number of polar and azimuthal slices that the generated sphere will have.
+			var polarDelta = Mathf.PI / depth;   // Polar slices are applied from 0 to 180 degrees.
+			var azimuthalDelta = 2 * polarDelta; // Azimuthal slices are applied from 0 to 360 degrees.
 			var vertices = GetVertexBuffer(depth, Allocator.Temp);
 			var indices = GetIndicesBuffer(depth, Allocator.Temp);
-			vertices[0] = Vector3.up;
+			
+			// Add the first vertex: the "top" of the sphere.
+			vertices[0] = Vector3.up; 
 			var vertexIx = 1;
 			var indicesIx = 0;
 
+			// Add all the triangles, except the ones in the bottom pole (it's a special case).
 			for (var polarStep = 1; polarStep < depth; polarStep++)
 			{
 				for (var azimuthalStep = 0; azimuthalStep < depth; azimuthalStep++)
 				{
 					var addSecondTriangle = polarStep != 1;
-					AddVertex(polarStep, azimuthalStep, addSecondTriangle);
+					AddPrimitive(polarStep, azimuthalStep, addSecondTriangle);
 				}
 			}
 
+			// Add the last triangles: the ones at the "bottom" of the sphere.
 			vertices[vertexIx] = Vector3.down;
 			var indexOfFirstVertexFromLastSlice = vertexIx - depth;
 
@@ -61,9 +71,19 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 			static NativeArray<int> GetIndicesBuffer(ushort fragmentationDepth, Allocator allocator)
 			{
-				var quadCount = (fragmentationDepth - 2) * fragmentationDepth;
-				var polarTriangleCount = 2 * fragmentationDepth;
-				var triangleCount = 2 * quadCount + polarTriangleCount;
+				// First, find the triangle count for the poles. Each pole has exactly D triangles, where D is the
+				// fragmentation depth. There are 2 poles (top and bottom).
+				var polesTriangleCount = 2 * fragmentationDepth;
+				
+				// Then, find the quad count for the "middle" of the sphere (everything except the poles). It can be
+				// found by calculating the number of vertical slices (which is the same as the depth) by the number of
+				// horizontal slices, except the poles (-2).
+				var middleQuadCount = fragmentationDepth * (fragmentationDepth - 2);
+				// Each quad is made out of 2 triangles.
+				var middleTriangleCount = 2 * middleQuadCount;
+				
+				// Finally, find the total triangle count.
+				var triangleCount = middleTriangleCount + polesTriangleCount;
 				var indicesCount = triangleCount * 3;
 				return new NativeArray<int>(indicesCount, allocator, NativeArrayOptions.UninitializedMemory);
 			}
@@ -78,21 +98,24 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 				indicesIx++;
 			}
 
-			void AddVertex(int polarStep, int azimuthalStep, bool addSecondTriangle)
+			void AddPrimitive(int polarStep, int azimuthalStep, bool isQuad)
 			{
+				// Calculate the spherical coordinates.
 				var polar = polarDelta * polarStep;
 				var azimuth = azimuthalDelta * azimuthalStep;
+				// Convert to cartesian.
 				vertices[vertexIx] = PolarToCartesian(polar, azimuth);
 
+				// We need 3 points to form the triangle.
 				var secondVertexIx = GetVertexAboveIndex(polarStep, vertexIx, depth);
-				var thirdVertexIx = GetVertexAboveNextIndex(polarStep, azimuthalStep, vertexIx, depth);
-				var fourthVertexIx = GetNextVertexInPolarSliceIndex(azimuthalStep, vertexIx, depth);
+				var thirdVertexIx = GetNextVertexInPolarSliceIndex(azimuthalStep, vertexIx, depth);
 
-				AddTriangle(vertexIx, secondVertexIx, fourthVertexIx, indices, ref indicesIx);
+				AddTriangle(vertexIx, secondVertexIx, thirdVertexIx, indices, ref indicesIx);
 
-				if (addSecondTriangle)
+				if (isQuad)
 				{
-					AddTriangle(secondVertexIx, thirdVertexIx, fourthVertexIx, indices, ref indicesIx);
+					var fourthVertexIx = GetVertexAboveNextIndex(polarStep, azimuthalStep, vertexIx, depth);
+					AddTriangle(secondVertexIx, fourthVertexIx, thirdVertexIx, indices, ref indicesIx);
 				}
 
 				vertexIx++;

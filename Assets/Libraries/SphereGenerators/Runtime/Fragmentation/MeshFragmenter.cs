@@ -6,12 +6,20 @@ using UnityEngine;
 namespace LazySquirrelLabs.SphereGenerators.Fragmentation
 {
 	/// <summary>
-	/// Fragments a mesh into sub-triangles given an arbitrary depth. The original mesh is modified.
+	/// Fragments a mesh into sub-triangles given an arbitrary depth.
 	/// </summary>
 	internal static class MeshFragmenter
 	{
 		#region Internal
 
+		/// <summary>
+		/// Fragments the provided mesh data.
+		/// </summary>
+		/// <param name="meshData">The mesh data to be fragmented. It remains intact during fragmentation.</param>
+		/// <param name="fragmentationDepth">The depth of the fragmentation process. In order words, how many
+		/// iterations of triangle fragmentation will be performed on the sphere's basic mesh.</param>
+		/// <param name="allocator">The allocation strategy used when creating vertex and index buffers.</param>
+		/// <returns>A new mesh data representing the provided one, fragmented.</returns>
 		internal static MeshData Fragment(MeshData meshData, ushort fragmentationDepth, Allocator allocator)
 		{
 			if (fragmentationDepth == 0)

@@ -3,10 +3,16 @@ using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerators.Generators
 {
+	/// <summary>
+	/// A sphere generator that uses a cube sphere as basic shape.
+	/// </summary>
 	public class CubeSphereGenerator : SphereGenerator
 	{
 		#region Fields
 
+		/// <summary>
+		/// Vertices of a cube, obtained via experimentation.
+		/// </summary>
 		private static readonly Vector3[] CubeSphereVertices =
 		{
 			new(-0.5f,  0.5f, -0.5f), // 0
@@ -20,7 +26,7 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 		};
 		
 		/// <summary>
-		/// 
+		/// Indices of a cube, obtained via experimentation.
 		/// </summary>
 		private static readonly int[] CubeSphereIndices =
 		{
@@ -50,6 +56,13 @@ namespace LazySquirrelLabs.SphereGenerators.Generators
 
 		#region Setup
 
+		/// <summary>
+		/// <see cref="CubeSphereGenerator"/>'s constructor.
+		/// </summary>
+		/// <param name="radius">The radius of the generated cube spheres.</param>
+		/// <param name="depth">The fragmentation depth of the generated spheres. In order words, how many times the
+		/// basic shape will be fragmented to form the sphere mesh. The larger the value, the greater the level of
+		/// detail will be (more triangles and vertices) and the longer the generation process takes.</param>
 		public CubeSphereGenerator(float radius, ushort depth) : base(radius, depth, "Cube Sphere")
 		{
 			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator.Temp);

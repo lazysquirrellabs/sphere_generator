@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerators.Data
 {
+	/// <summary>
+	/// Simple entity that wraps a mesh's vertex and index data.
+	/// </summary>
 	internal struct MeshData : IDisposable
 	{
 		#region Fields
@@ -44,6 +47,10 @@ namespace LazySquirrelLabs.SphereGenerators.Data
 
 		#region Internal
 
+		/// <summary>
+		/// Set the radius of the sphere mesh, effectively putting all vertices at the same distance from the center.
+		/// </summary>
+		/// <param name="radius">How far all vertices should be from the center, in units.</param>
 		internal void SetRadius(float radius)
 		{
 			for (var i = 0; i < _vertices.Length; i++)
