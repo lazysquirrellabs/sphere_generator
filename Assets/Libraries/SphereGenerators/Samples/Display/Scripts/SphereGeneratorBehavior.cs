@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 namespace LazySquirrelLabs.SphereGenerators.Samples.Display
 {
-
+	/// <summary>
+	/// A customizable example of how the sphere generators work.
+	/// </summary>
 	internal class SphereGeneratorBehavior : MonoBehaviour
 	{
 		#region Entities

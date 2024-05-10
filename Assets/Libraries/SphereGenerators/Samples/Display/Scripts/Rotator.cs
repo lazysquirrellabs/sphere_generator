@@ -2,6 +2,9 @@ using UnityEngine;
 
 namespace LazySquirrelLabs.SphereGenerators.Samples.Display
 {
+	/// <summary>
+	/// A behavior that rotates the game object it's attached to around the Y axis.
+	/// </summary>
 	internal class Rotator : MonoBehaviour
 	{
 		#region Serialized fields
