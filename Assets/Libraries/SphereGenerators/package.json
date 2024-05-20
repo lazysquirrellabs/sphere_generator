@@ -1,0 +1,32 @@
+{
+  "name": "com.lazysquirrellabs.spheregenerators",
+  "version": "1.0.0",
+  "displayName": "Sphere Generators",
+  "description": "Generate sphere meshes procedurally.",
+  "unity": "2022.3",
+  "documentationUrl": "http://spheres.matheusamazonas.net",
+  "changelogUrl": "https://github.com/matheusamazonas/sphere_generator/releases",
+  "licensesUrl": "https://github.com/matheusamazonas/sphere_generator/blob/main/LICENSE",
+  "dependencies": {
+    "com.unity.collections": "2.4.1"
+  },
+  "keywords": [
+    "tools",
+    "sphere",
+    "sphere generator",
+    "procedural",
+    "procedural generation"
+  ],
+  "author": {
+    "name": "Matheus Amazonas",
+    "email": "matheus.amazonas@gmail.com",
+    "url": "https://matheusamazonas.net"
+  },
+  "samples": [
+    {
+      "displayName": "Display",
+      "description": "This sample displays the generational capabilities of the tool, displaying all supported sphere types with different depths. This sample is better displayed in the Scene view, with \"Shading Mode\" set to \"Shared wireframe\", so the vertices and triangles are visible." ,
+      "path": "Samples~/Display"
+    }
+  ]
+}
