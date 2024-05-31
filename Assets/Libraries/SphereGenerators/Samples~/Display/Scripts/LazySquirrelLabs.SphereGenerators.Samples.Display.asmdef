@@ -1,0 +1,16 @@
+{
+    "name": "LazySquirrelLabs.SphereGenerators.Samples.Display",
+    "rootNamespace": "LazySquirrelLabs.SphereGenerators.Samples.Display",
+    "references": [
+        "GUID:aaf3544262b8a43b3ad6097304762f46"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
