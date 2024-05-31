@@ -1,6 +1,6 @@
 {
-    "name": "LazySquirrelLabs.SphereGenerators.Samples.Display",
-    "rootNamespace": "LazySquirrelLabs.SphereGenerators.Samples.Display",
+    "name": "LazySquirrelLabs.SphereGenerator.Samples.Display",
+    "rootNamespace": "LazySquirrelLabs.SphereGenerator.Samples.Display",
     "references": [
         "GUID:aaf3544262b8a43b3ad6097304762f46"
     ],

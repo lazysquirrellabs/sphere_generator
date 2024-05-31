@@ -1,7 +1,7 @@
 {
-  "name": "com.lazysquirrellabs.spheregenerators",
+  "name": "com.lazysquirrellabs.spheregenerator",
   "version": "1.0.0",
-  "displayName": "Sphere Generators",
+  "displayName": "Sphere Generator",
   "description": "Generate sphere meshes procedurally.",
   "unity": "2022.3",
   "documentationUrl": "http://spheres.matheusamazonas.net",
