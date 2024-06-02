@@ -1,7 +1,7 @@
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerators.Generators
+namespace LazySquirrelLabs.SphereGenerator.Generators
 {
 	/// <summary>
 	/// A sphere generator that uses a cube sphere as basic shape.

@@ -2,7 +2,7 @@ using System;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerators.Data
+namespace LazySquirrelLabs.SphereGenerator.Data
 {
 	/// <summary>
 	/// Simple entity that wraps a mesh's vertex and index data.

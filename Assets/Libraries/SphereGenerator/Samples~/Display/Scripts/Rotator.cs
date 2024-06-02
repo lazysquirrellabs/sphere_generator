@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerators.Samples.Display
+namespace LazySquirrelLabs.SphereGenerator.Samples.Display
 {
 	/// <summary>
 	/// A behavior that rotates the game object it's attached to around the Y axis.

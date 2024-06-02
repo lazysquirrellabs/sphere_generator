@@ -2,7 +2,7 @@ using System;
 using Unity.Collections;
 using UnityEngine;
 
-namespace LazySquirrelLabs.SphereGenerators.Generators
+namespace LazySquirrelLabs.SphereGenerator.Generators
 {
 	/// A sphere generator that uses a UV sphere as basic shape.
 	public class UVSphereGenerator : SphereGenerator

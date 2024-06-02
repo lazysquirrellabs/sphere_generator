@@ -1,9 +1,9 @@
 using System;
-using LazySquirrelLabs.SphereGenerators.Generators;
+using LazySquirrelLabs.SphereGenerator.Generators;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace LazySquirrelLabs.SphereGenerators.Samples.Display
+namespace LazySquirrelLabs.SphereGenerator.Samples.Display
 {
 	/// <summary>
 	/// A customizable example of how the sphere generators work.
@@ -35,7 +35,7 @@ namespace LazySquirrelLabs.SphereGenerators.Samples.Display
 
 		private void Awake()
 		{
-			SphereGenerator generator = _type switch
+			Generators.SphereGenerator generator = _type switch
 			{
 				SphereType.Icosphere  => new IcosphereGenerator(_radius, _depth),
 				SphereType.CubeSphere => new CubeSphereGenerator(_radius, _depth),

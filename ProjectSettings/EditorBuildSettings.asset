@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Libraries/SphereGenerators/Samples/Display/Scenes/Display.unity
+    path: Assets/Libraries/SphereGenerator/Samples/Display/Scenes/Display.unity
     guid: 0a232b9262ddc4f3ea4486cb9a0218d2
   m_configObjects: {}

@@ -1,10 +1,10 @@
-using LazySquirrelLabs.SphereGenerators.Data;
-using LazySquirrelLabs.SphereGenerators.Fragmentation;
+using LazySquirrelLabs.SphereGenerator.Data;
+using LazySquirrelLabs.SphereGenerator.Fragmentation;
 using Unity.Collections;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-namespace LazySquirrelLabs.SphereGenerators.Generators
+namespace LazySquirrelLabs.SphereGenerator.Generators
 {
 	/// <summary>
 	/// Base class for all sphere generators.
