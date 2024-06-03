@@ -51,9 +51,9 @@ After importing , check the [Usage](#usage) section on how to use it and the [Sa
 ## Usage
 Using Sphere Generator is straightforward. First, create a `SphereGenerator` (base class) instance by calling one of the supported sphere type constructors:
 ```csharp
-public CubeSphereGenerator(float radius, ushort depth)
-public IcosphereGenerator(float radius, ushort depth)
-public UVSphereGenerator(float radius, ushort depth)
+public CubeSphereGenerator(float radius, ushort depth);
+public IcosphereGenerator(float radius, ushort depth);
+public UVSphereGenerator(float radius, ushort depth);
 ```
 Where `radius` is the sphere radius and `depth` is the fragmentation depth (a.k.a. level of detail) of the to-be generated spheres. Check the documentation for valid parameter value ranges.
 
