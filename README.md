@@ -10,6 +10,7 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 	- [Import with OpenUPM](#import-with-openupm)
 	- [After importing](#after-importing)
 - [Usage](#usage)
+  - [Example](#example)
 - [Samples](#samples)
 - [Compatibility and dependencies](#compatibility-and-dependencies)
 - [Contributing](#contributing)
@@ -18,7 +19,7 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 
 ## Features
 - Support for different basic shapes:
-  - Icosphere.
+  - Icosphere (based on a regular icosahedron).
   - Cube sphere.
   - UV sphere.
 - Customizable radius and level of detail (a.k.a. fragmentation depth). 
@@ -48,7 +49,32 @@ Once the importing process is complete, Sphere Generator is ready to be used in 
 After importing , check the [Usage](#usage) section on how to use it and the [Samples](#samples) section on how to import and use the package samples.
 
 ## Usage
-// TODO
+Using Sphere Generator is straightforward. First, create a `SphereGenerator` (base class) instance by calling one of the supported sphere type constructors:
+```csharp
+public CubeSphereGenerator(float radius, ushort depth);
+public IcosphereGenerator(float radius, ushort depth);
+public UVSphereGenerator(float radius, ushort depth);
+```
+Where `radius` is the sphere radius and `depth` is the fragmentation depth (a.k.a. level of detail) of the to-be generated spheres. Check the documentation for valid parameter value ranges.
+
+Once an instance of the `SphereGenerator` class is created, its `Generate` method can be called to generate a sphere mesh:
+```csharp
+public Mesh Generate()
+```
+The method returns a `Mesh` instance that represents the generated sphere. It is up to the user to control the lifetime of the `Mesh` instance.
+
+### Example
+Let's say we would like to create an icosphere with radius of 20 units, a fragmentation depth of 3, and use the generated mesh on a mesh filter that is used by a mesh renderer to display the sphere in the scene. The code below implements that inside an `Awake` method:
+```csharp
+[SerializeField] private MeshFilter _meshFilter;
+
+private void Awake()
+{
+    SphereGenerator generator = new IcosphereGenerator(20, 3);  
+    Mesh mesh = generator.Generate();
+    _meshFilter.mesh = mesh;
+}
+```
 
 ## Samples
 The package contains one sample named "Display". It displays the generational capabilities of the tool, displaying all supported sphere types with different depths. This sample is better displayed in the Scene view, with "Shading Mode" set to "Shared wireframe", so the vertices and triangles are visible. This sample was also used to generate the image at the top of this page.
