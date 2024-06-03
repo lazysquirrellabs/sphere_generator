@@ -19,7 +19,7 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 
 ## Features
 - Support for different basic shapes:
-  - Icosphere.
+  - Icosphere (based on a regular icosahedron).
   - Cube sphere.
   - UV sphere.
 - Customizable radius and level of detail (a.k.a. fragmentation depth). 
