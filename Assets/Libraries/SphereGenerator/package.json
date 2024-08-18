@@ -8,7 +8,7 @@
   "changelogUrl": "https://github.com/matheusamazonas/sphere_generator/releases",
   "licensesUrl": "https://github.com/matheusamazonas/sphere_generator/blob/main/LICENSE",
   "dependencies": {
-    "com.unity.collections": "2.4.1"
+    "com.unity.collections": "2.4.2"
   },
   "keywords": [
     "tools",
