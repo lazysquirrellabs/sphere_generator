@@ -1,6 +1,8 @@
 # Sphere Generator
 Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 
+[![openupm](https://img.shields.io/npm/v/com.lazysquirrellabs.spheregenerator?label=openupm&registry_uri=https://package.openupm.com)](https://openupm.com/packages/com.lazysquirrellabs.spheregenerator/)
+
 ![A display of examples of 12 different shapes representing 3 different sphere types (icosphere, cube sphere, UV sphere), each one with 4 examples with different vertex count.](https://blog.matheusamazonas.net/assets/images/post22/sphere_display.png)
 
 ## Contents
