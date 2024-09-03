@@ -4,9 +4,9 @@
   "displayName": "Sphere Generator",
   "description": "Generate sphere meshes procedurally.",
   "unity": "2022.3",
-  "documentationUrl": "http://spheres.matheusamazonas.net",
-  "changelogUrl": "https://github.com/matheusamazonas/sphere_generator/releases",
-  "licensesUrl": "https://github.com/matheusamazonas/sphere_generator/blob/main/LICENSE",
+  "documentationUrl": "https://github.com/lazysquirrellabs/sphere_generator",
+  "changelogUrl": "https://github.com/lazysquirrellabs/sphere_generator/releases",
+  "licensesUrl": "https://github.com/lazysquirrellabs/sphere_generator/blob/main/LICENSE",
   "dependencies": {
     "com.unity.collections": "2.4.3"
   },

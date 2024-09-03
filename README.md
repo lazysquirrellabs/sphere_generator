@@ -37,7 +37,7 @@ This approach uses Unity's Package Manager to add Sphere Generator to your proje
 
 Next, enter the following in the "URL" input field to install the latest version of Sphere Generator:
 ```
-https://github.com/matheusamazonas/sphere_generator.git?path=Assets/Libraries/SphereGenerator
+https://github.com/lazysquirrellabs/sphere_generator.git?path=Assets/Libraries/SphereGenerator
 ```
 Finally, click on the "Add" button. The importing process should start automatically. Once it's done, Sphere Generator is ready to be used in the project. 
 
@@ -94,10 +94,10 @@ The following basic shapes are planned to be implemented in future versions:
 - Fibonacci.
 
 ## Contributing
-If you would like to report e bug, please create an [issue](https://github.com/matheusamazonas/sphere_generator/issues). If you would like to contribute with bug fixing or small improvements, please open a Pull Request. If you would like to contribute with a new feature (regardless if it's in the roadmap or not), [contact the developer](https://matheusamazonas.net/contact.html).  
+If you would like to report e bug, please create an [issue](https://github.com/lazysquirrellabs/sphere_generator/issues). If you would like to contribute with bug fixing or small improvements, please open a Pull Request. If you would like to contribute with a new feature (regardless if it's in the roadmap or not), [contact the developer](https://matheusamazonas.net/contact.html).  
 
 ## Getting help
-Use the [issues page](https://github.com/matheusamazonas/sphere_generator/issues) if there's a problem with your Sphere Generator setup, if something isn't working as expected, or if you would like to ask questions about the tool and its usage.
+Use the [issues page](https://github.com/lazysquirrellabs/sphere_generator/issues) if there's a problem with your Sphere Generator setup, if something isn't working as expected, or if you would like to ask questions about the tool and its usage.
 
 ## License
 Sphere Generator is distributed under the terms of the MIT license. For more information, check the [LICENSE](LICENSE) file in this repository.
