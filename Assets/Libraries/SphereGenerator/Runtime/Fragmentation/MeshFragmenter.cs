@@ -105,9 +105,9 @@ namespace LazySquirrelLabs.SphereGenerator.Fragmentation
 				var v1 = readVertices[indexVertex1];
 				var v2 = readVertices[indexVertex2];
 				var v3 = readVertices[indexVertex3];
-				var v4 = (v1 + v2) / 2;
-				var v5 = (v2 + v3) / 2;
-				var v6 = (v3 + v1) / 2;
+				var v4 = Vector3.Slerp(v1, v2, 0.5f);
+				var v5 = Vector3.Slerp(v2, v3, 0.5f);
+				var v6 = Vector3.Slerp(v3, v1, 0.5f);
 
 				// Add new vertices
 				var ix1 = AddVertex(v1);

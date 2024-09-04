@@ -19,7 +19,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// It must be equal or greater than 3.</param>
 		/// <exception cref="ArgumentOutOfRangeException">Thrown if <paramref name="depth"/> is
 		/// lower than 3.</exception>
-		public UVSphereGenerator(float radius, ushort depth) : base(radius, "UV Sphere")
+		public UVSphereGenerator(float radius, ushort depth) : base("UV Sphere")
 		{
 			if (depth < 3)
 			{
@@ -33,7 +33,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			var indices = GetIndicesBuffer(depth, Allocator.Temp);
 			
 			// Add the first vertex: the "top" of the sphere.
-			vertices[0] = Vector3.up; 
+			vertices[0] = Vector3.up * radius; 
 			var vertexIx = 1;
 			var indicesIx = 0;
 
@@ -48,7 +48,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 			}
 
 			// Add the last triangles: the ones at the "bottom" of the sphere.
-			vertices[vertexIx] = Vector3.down;
+			vertices[vertexIx] = Vector3.down * radius;
 			var indexOfFirstVertexFromLastSlice = vertexIx - depth;
 
 			for (var azimuthalStep = 0; azimuthalStep < depth; azimuthalStep++)
@@ -104,7 +104,7 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				var polar = polarDelta * polarStep;
 				var azimuth = azimuthalDelta * azimuthalStep;
 				// Convert to cartesian.
-				vertices[vertexIx] = PolarToCartesian(polar, azimuth);
+				vertices[vertexIx] = PolarToCartesian(polar, azimuth, radius);
 
 				// We need 3 points to form the triangle.
 				var secondVertexIx = GetVertexAboveIndex(polarStep, vertexIx, depth);
@@ -121,12 +121,12 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				vertexIx++;
 				return;
 
-				static Vector3 PolarToCartesian(float polar, float azimuth)
+				static Vector3 PolarToCartesian(float polar, float azimuth, float radius)
 				{
 					var polarSin = Mathf.Sin(polar);
-					var x = polarSin * Mathf.Cos(azimuth);
-					var y = Mathf.Cos(polar);
-					var z = polarSin * Mathf.Sin(azimuth);
+					var x = polarSin * Mathf.Cos(azimuth) * radius;
+					var y = Mathf.Cos(polar) * radius;
+					var z = polarSin * Mathf.Sin(azimuth) * radius;
 					return new Vector3(x, y, z);
 				}
 

@@ -16,11 +16,6 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		private const int MaxVertexCountUInt16 = 65_535;
 
 		/// <summary>
-		/// The radius of the generated sphere (i.e. the distance between each vertex and the sphere's center).
-		/// </summary>
-		private readonly float _radius;
-
-		/// <summary>
 		/// The fragmentation depth applied to the sphere's basic shape. Only relevant when fragmentation is used.
 		/// </summary>
 		private readonly ushort _depth;
@@ -56,12 +51,10 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// <summary>
 		/// Creates a <see cref="SphereGenerator"/> that uses fragmentation.
 		/// </summary>
-		/// <param name="radius">The sphere's radius.</param>
-		/// <param name="depth">The fragmentation depth that will be applie to the sphere's basic mesh.</param>
+		/// <param name="depth">The fragmentation depth that will be applied to the sphere's basic mesh.</param>
 		/// <param name="meshName">The name of the generated mesh.</param>
-		private protected SphereGenerator(float radius, ushort depth, string meshName)
+		private protected SphereGenerator(ushort depth, string meshName)
 		{
-			_radius = radius;
 			_fragment = true;
 			_depth = depth;
 			_meshName = meshName;
@@ -70,11 +63,9 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// <summary>
 		/// Creates a <see cref="SphereGenerator"/> that does not fragmentation.
 		/// </summary>
-		/// <param name="radius">The sphere's radius.</param>
 		/// <param name="meshName">The name of the generated mesh.</param>
-		private protected SphereGenerator(float radius, string meshName)
+		private protected SphereGenerator(string meshName)
 		{
-			_radius = radius;
 			_fragment = false;
 			_meshName = meshName;
 		}
@@ -102,7 +93,6 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 				finalMeshData = basicMeshData;
 			}
 
-			finalMeshData.SetRadius(_radius);
 			var mesh = new Mesh();
 			mesh.name = _meshName;
 
