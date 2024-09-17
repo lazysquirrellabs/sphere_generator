@@ -16,6 +16,7 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 - [Samples](#samples)
 - [Compatibility and dependencies](#compatibility-and-dependencies)
 - [Roadmap](#roadmap)
+- [Technical aspects](#technical-aspects)
 - [Contributing](#contributing)
 - [Getting help](#getting-help)
 - [License](#license)
@@ -92,6 +93,9 @@ Sphere Generator requires Unity 2022.3.X or above, its target API compatibility 
 The following basic shapes are planned to be implemented in future versions:
 - Truncated icosahedron.
 - Fibonacci.
+
+## Technical aspects
+Sphere Generator's icosphere implementation has been discussed in the following blog post: [Generating an icosphere with code](https://blog.matheusamazonas.net/posts/generating_icosphere_with_code).
 
 ## Contributing
 If you would like to report e bug, please create an [issue](https://github.com/lazysquirrellabs/sphere_generator/issues). If you would like to contribute with bug fixing or small improvements, please open a Pull Request. If you would like to contribute with a new feature (regardless if it's in the roadmap or not), [contact the developer](https://matheusamazonas.net/contact.html).  
