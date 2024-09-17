@@ -11,18 +11,23 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		#region Fields
 
 		/// <summary>
+		/// A coordinate that when used for all Vector3's axis will deliver a unit vector.
+		/// </summary>
+		private static readonly float UnitCoordinate = Mathf.Sqrt(1 / 3f);
+		
+		/// <summary>
 		/// Vertices of a cube, obtained via experimentation.
 		/// </summary>
 		private static readonly Vector3[] CubeSphereVertices =
 		{
-			new(-0.5f,  0.5f, -0.5f), // 0
-			new( 0.5f,  0.5f, -0.5f), // 1
-			new( 0.5f, -0.5f, -0.5f), // 2
-			new(-0.5f, -0.5f, -0.5f), // 3
-			new(-0.5f,  0.5f,  0.5f), // 4
-			new( 0.5f,  0.5f,  0.5f), // 5
-			new(-0.5f, -0.5f,  0.5f), // 6
-			new( 0.5f, -0.5f,  0.5f)  // 7
+			new(-UnitCoordinate,  UnitCoordinate, -UnitCoordinate), // 0
+			new( UnitCoordinate,  UnitCoordinate, -UnitCoordinate), // 1
+			new( UnitCoordinate, -UnitCoordinate, -UnitCoordinate), // 2
+			new(-UnitCoordinate, -UnitCoordinate, -UnitCoordinate), // 3
+			new(-UnitCoordinate,  UnitCoordinate,  UnitCoordinate), // 4
+			new( UnitCoordinate,  UnitCoordinate,  UnitCoordinate), // 5
+			new(-UnitCoordinate, -UnitCoordinate,  UnitCoordinate), // 6
+			new( UnitCoordinate, -UnitCoordinate,  UnitCoordinate)  // 7
 		};
 		
 		/// <summary>
@@ -63,9 +68,17 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// <param name="depth">The fragmentation depth of the generated spheres. In order words, how many times the
 		/// basic shape will be fragmented to form the sphere mesh. The larger the value, the greater the level of
 		/// detail will be (more triangles and vertices) and the longer the generation process takes.</param>
-		public CubeSphereGenerator(float radius, ushort depth) : base(radius, depth, "Cube Sphere")
+		public CubeSphereGenerator(float radius, ushort depth) : base(depth, "Cube Sphere")
 		{
-			Vertices = new NativeArray<Vector3>(CubeSphereVertices, Allocator.Temp);
+			var vertices = new NativeArray<Vector3>(CubeSphereVertices.Length, Allocator.Temp,
+			                                        NativeArrayOptions.UninitializedMemory);
+
+			for (var i = 0; i < CubeSphereVertices.Length; ++i)
+			{
+				vertices[i] = CubeSphereVertices[i] * radius;
+			}
+
+			Vertices = vertices;
 			Indices = new NativeArray<int>(CubeSphereIndices, Allocator.Temp);
 		}
 

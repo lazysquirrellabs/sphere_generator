@@ -75,9 +75,17 @@ namespace LazySquirrelLabs.SphereGenerator.Generators
 		/// <param name="depth">The fragmentation depth of the generated spheres. In order words, how many times the
 		/// basic shape will be fragmented to form the sphere mesh. The larger the value, the greater the level of
 		/// detail will be (more triangles and vertices) and the longer the generation process takes.</param>
-		public IcosphereGenerator(float radius, ushort depth) : base(radius, depth, "Icosphere")
+		public IcosphereGenerator(float radius, ushort depth) : base(depth, "Icosphere")
 		{
-			Vertices = new NativeArray<Vector3>(IcosphereVertices, Allocator.Temp);
+			var vertices = new NativeArray<Vector3>(IcosphereVertices.Length, Allocator.Temp,
+			                                    NativeArrayOptions.UninitializedMemory);
+
+			for (var i = 0; i < IcosphereVertices.Length; ++i)
+			{
+				vertices[i] = IcosphereVertices[i] * radius;
+			}
+
+			Vertices = vertices;
 			Indices = new NativeArray<int>(IcosphereIndices, Allocator.Temp);
 		}
 
