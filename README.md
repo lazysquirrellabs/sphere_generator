@@ -98,7 +98,7 @@ The following basic shapes are planned to be implemented in future versions:
 Sphere Generator's icosphere implementation has been discussed in the following blog post: [Generating an icosphere with code](https://blog.matheusamazonas.net/posts/generating_icosphere_with_code).
 
 ## Contributing
-If you would like to report e bug, please create an [issue](https://github.com/lazysquirrellabs/sphere_generator/issues). If you would like to contribute with bug fixing or small improvements, please open a Pull Request. If you would like to contribute with a new feature (regardless if it's in the roadmap or not), [contact the developer](https://matheusamazonas.net/contact.html).  
+If you would like to report a bug, please create an [issue](https://github.com/lazysquirrellabs/sphere_generator/issues). If you would like to contribute with bug fixing or small improvements, please open a Pull Request. If you would like to contribute with a new feature (regardless if it's in the roadmap or not), [contact the developer](https://matheusamazonas.net/contact.html).  
 
 ## Getting help
 Use the [issues page](https://github.com/lazysquirrellabs/sphere_generator/issues) if there's a problem with your Sphere Generator setup, if something isn't working as expected, or if you would like to ask questions about the tool and its usage.
