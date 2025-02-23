@@ -38,7 +38,7 @@ This approach uses Unity's Package Manager to add Sphere Generator to your proje
 
 Next, enter the following in the "URL" input field to install the latest version of Sphere Generator:
 ```
-https://github.com/lazysquirrellabs/sphere_generator.git?path=Assets/Libraries/SphereGenerator
+https://github.com/lazysquirrellabs/sphere_generator.git?path=Assets/Lazy Squirrel Labs/SphereGenerator
 ```
 Finally, click on the "Add" button. The importing process should start automatically. Once it's done, Sphere Generator is ready to be used in the project. 
 
