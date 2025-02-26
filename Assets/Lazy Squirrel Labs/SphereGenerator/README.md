@@ -10,6 +10,7 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 ## Contents
 - [Features](#features)
 - [Importing](#importing)
+	- [Import via Unity Asset Store](#import-via-unity-asset-store)
 	- [Import using a git URL](#import-using-a-git-url)
 	- [Import with OpenUPM](#import-with-openupm)
 	- [After importing](#after-importing)
