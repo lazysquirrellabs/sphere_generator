@@ -5,6 +5,8 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 
 ![A display of examples of 12 different shapes representing 3 different sphere types (icosphere, cube sphere, UV sphere), each one with 4 examples with different vertex count.](https://blog.matheusamazonas.net/assets/images/post22/sphere_display.png)
 
+[![](https://minmax.lslabs.dev/assets/images/get_unity.webp)](https://assetstore.unity.com/packages/tools/modeling/spheres-generator-311994)
+
 ## Contents
 - [Features](#features)
 - [Importing](#importing)
@@ -29,7 +31,16 @@ Sphere Generator is a free Unity tool for generating sphere meshes procedurally.
 - Customizable radius and level of detail (a.k.a. fragmentation depth). 
 
 ## Importing
-The first step to get started with Sphere Generator is to import the library into your Unity project. There are two ways to do so: via the Package Manager using a git URL, and via OpenUPM.
+The first step is to import the library into your Unity project. There are three ways to do so: 
+- [Via the Asset Store](#import-via-unity-asset-store).
+- Via the Package Manager:
+	- [Using a git URL](#import-using-a-git-url). 
+	- [Using OpenUPM](#import-with-openupm).
+
+### Import via Unity Asset Store
+Click on the image below to visit the package's page on the Unity Asset Store. One there, follow the instructions to import it into your project.
+
+[![](https://minmax.lslabs.dev/assets/images/get_unity.webp)](https://assetstore.unity.com/packages/tools/modeling/spheres-generator-311994)
 
 ### Import using a git URL
 This approach uses Unity's Package Manager to add Sphere Generator to your project using the repo's git URL. To do so, navigate to `Window > Package Manager` in Unity. Then click on the `+` and select "Add package from git URL":
